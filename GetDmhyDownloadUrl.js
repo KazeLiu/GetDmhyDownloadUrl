@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         一键获取动漫花园下载磁链
 // @namespace    http://tampermonkey.net/
-// @version      0.1
+// @version      0.1.1
 // @description  一键获取动漫花园下载磁链!
 // @author       Kaze
 // @match        https://share.dmhy.org/*
@@ -12,7 +12,6 @@
 
 (function () {
     'use strict';
-    let urls = []
     let addDom = {
         hasStyle: false,
         init() {
@@ -22,7 +21,7 @@
             getInfo.getUrls();
         },
         addDialog() {
-            let height = document.documentElement.clientHeight ;
+            let height = document.documentElement.clientHeight;
             let styleElement = document.createElement('style');
             styleElement.type = 'text/css';
             styleElement.innerHTML = `
@@ -66,8 +65,8 @@
         },
         createInitBtn() {
             let btnDiv = document.createElement('span');
-            btnDiv.innerHTML=`&nbsp;|&nbsp;获取本页全部种子链接`
-            btnDiv.style.cursor="pointer"
+            btnDiv.innerHTML = `&nbsp;|&nbsp;获取本页全部种子链接`
+            btnDiv.style.cursor = "pointer"
             document.querySelector('.headerright .links').append(btnDiv)
             btnDiv.addEventListener('click', () => {
                 this.init();
@@ -76,6 +75,7 @@
     }
     let getInfo = {
         getUrls() {
+            let urls = []
             document.querySelectorAll('.download-arrow').forEach(item =>
                 urls.push(item.getAttribute('href'))
             );
