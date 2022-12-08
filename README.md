@@ -23,4 +23,5 @@
     ![粘贴到下载器](https://raw.githubusercontent.com/LiuZiYang1/GetDmhyDownloadUrl/main/3.jpg "粘贴到下载器")
 
 
-## 需要其他功能欢迎提issues
+
+### 需要其他功能，有bug，有想法欢迎提[issues](https://github.com/KazeLiu/GetDmhyDownloadUrl/issues)
