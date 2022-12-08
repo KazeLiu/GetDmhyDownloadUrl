@@ -6,16 +6,15 @@
 
 这是我的使用方法，我的下载器是Aria2。
 1. 搜索你喜欢的番
-2. 搜索框右边有个高级
-3. 筛选字幕组
+2. 缩小搜索范围（筛选字幕组或者筛选画质）
 
     ![筛选列表](https://raw.githubusercontent.com/LiuZiYang1/GetDmhyDownloadUrl/main/1.jpg "筛选列表")
 
-4. 等待列表出来后就直接点击右上角获取全部连接
+3. 等待列表出来后就直接点击右上角获取全部连接，然后默认会勾选列表全部，可以在这里二次筛选（筛选结果不会保存）
 
-    ![获取链接](https://raw.githubusercontent.com/LiuZiYang1/GetDmhyDownloadUrl/main/2.jpg "获取链接")
+    ![获取链接](https://raw.githubusercontent.com/LiuZiYang1/GetDmhyDownloadUrl/main/Snipaste_2022-12-08_14-15-00.png "获取链接并筛选")
 
-5. ctrl+a复制全部连接后粘贴到下载器即可
+4. ctrl+a复制全部连接后粘贴到下载器即可
 
     ![粘贴到下载器](https://raw.githubusercontent.com/LiuZiYang1/GetDmhyDownloadUrl/main/3.jpg "粘贴到下载器")
 
