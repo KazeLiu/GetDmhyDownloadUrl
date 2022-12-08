@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         一键获取动漫花园下载磁链
 // @namespace    http://tampermonkey.net/
-// @version      0.1.5
+// @version      0.1.7
 // @description  一键获取动漫花园下载磁链!
 // @author       Kaze
 // @match        https://share.dmhy.org/*
@@ -42,7 +42,7 @@
            }
            .kaze-dialog .kaze-dialog-input{
                 width: 99%;
-                height: 200px;
+                height: 100px;
                 overflow:auto;
            }
 
@@ -67,19 +67,27 @@
                 font-size: 25px;
                 text-align: center;
            }
-           
+           .kaze-dialog .kaze-dialog-subtitle{
+            position: fixed;
+            top: 7vh;
+            font-size: 15px;
+            color: #fff;
+           }
            .kaze-dialog .kaze-dialog-checkbox{
                 height: 50vh;
                 overflow: auto;
                 width: 90%;
-                margin: 50px auto 0;
+                margin: 80px auto 0;
                 padding: 8px;
                 border: 1px solid #247;
                 background: #CDF;
                 font-size: 16px;
            }
            .kaze-dialog .kaze-dialog-checkbox>div{
-                margin:4px auto
+                margin:4px auto;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
            }
 
            .kaze-dialog .kaze-dialog-checkbox label{
@@ -99,13 +107,16 @@
             let dialogDiv = document.createElement('div');
             dialogDiv.innerHTML = `<div class="kaze-dialog">
                     <div class="kaze-dialog-title">可以只获取勾选的种子地址；请使用 ctrl+a 或者 command+a 全选文字自行复制</div>
+                    <a target="_blank" href='https://github.com/KazeLiu/GetDmhyDownloadUrl' class="kaze-dialog-subtitle">去Github查看项目或提建议(issues)</a>
                     <div class="kaze-dialog-checkbox"></div>
                     <div class="kaze-dialog-value">
                         <div class="quick_search_info">当前选中了X项目</div>
                         <textarea class="kaze-dialog-input" placeholder="如果不小心全部删除，按 ctrl + z 或者 command + z 撤回"></textarea>
-                        
+
                     </div>
-                    <div class="kaze-dialog-button-area"><button class="kaze-dialog-copy">一键复制</button> <button class="kaze-dialog-close">关闭</button></div>
+                    <div class="kaze-dialog-button-area">
+                    <button class="kaze-dialog-copy">一键复制</button>
+                    <button class="kaze-dialog-close">关闭</button></div>
                 </div>`
             document.getElementsByTagName('body')[0].appendChild(dialogDiv)
             dialogDiv.querySelector(".kaze-dialog-close").addEventListener('click', _ => {
@@ -151,7 +162,7 @@
                 let temp = document.createElement("div")
                 temp.innerHTML = `
                     <input type="checkbox" id="check_${index}" checked="true" data-url="${url}" onclick="getInfo.getUrlsInCheckbox()">
-                    <label for="check_${index}">${name}</label>`
+                    <label title="${name}" for="check_${index}">${name}</label>`
                 checkDiv.append(temp)
             });
             document.querySelector(".kaze-dialog .kaze-dialog-checkbox").append(...checkDiv.children);
