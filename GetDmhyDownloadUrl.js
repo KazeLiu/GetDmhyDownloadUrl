@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         一键获取动漫花园下载磁链
 // @namespace    http://tampermonkey.net/
-// @version      0.1.7
+// @version      0.1.9
 // @description  一键获取动漫花园下载磁链!
 // @author       Kaze
 // @match        https://share.dmhy.org/*
@@ -25,7 +25,7 @@
             let styleElement = document.createElement('style');
             styleElement.type = 'text/css';
             styleElement.innerHTML = `
-           .kaze-dialog {
+            .kaze-dialog {
                 position: fixed;
                 width: 100vw;
                 height: ${height}px;
@@ -34,85 +34,106 @@
                 top: 0;
                 display: flex;
                 flex-direction: column;
-                justify-content: space-around;
+                justify-content: space-evenly;
                 align-content: center;
                 flex-wrap: nowrap;
                 align-items: center;
-                z-index:20;
-           }
-           .kaze-dialog .kaze-dialog-input{
-                width: 99%;
-                height: 100px;
-                overflow:auto;
-           }
-
-           .kaze-dialog .kaze-dialog-value{
-                width:90%;
-                margin:0 auto;
-                color: #247;
-                border: 1px solid #247;
-                background: #CDF;
-                padding: 0px 8px 8px;
-           }
-
-           .kaze-dialog .quick_search_info{
-                margin:5px auto
-           }
-
-           .kaze-dialog .kaze-dialog-title{
-                position:absolute;
-                top: 2vh;
+                z-index: 20;
+            }
+            
+            .kaze-dialog .kaze-dialog-title {
                 color: #fff;
                 width: 100%;
                 font-size: 25px;
                 text-align: center;
-           }
-           .kaze-dialog .kaze-dialog-subtitle{
-            position: fixed;
-            top: 7vh;
-            font-size: 15px;
-            color: #fff;
-           }
-           .kaze-dialog .kaze-dialog-checkbox{
-                height: 50vh;
+            }
+            
+            .kaze-dialog .kaze-dialog-subtitle {
+                font-size: 15px;
+                color: #fff;
+            }
+            
+            .kaze-dialog .kaze-dialog-input {
+                width: 99%;
+                height: 100px;
                 overflow: auto;
+            }
+            
+            .kaze-dialog .kaze-dialog-value {
                 width: 90%;
-                margin: 80px auto 0;
-                padding: 8px;
+                margin: 0 auto;
+                color: #247;
                 border: 1px solid #247;
                 background: #CDF;
+                padding: 0px 8px 8px;
+            }
+            
+            .kaze-dialog .quick_search_info {
+                margin: 5px auto
+            }
+            
+            .kaze-dialog .kaze-dialog-checkbox-content{
+                display: flex;
+                margin: 0 auto;
+                flex-direction: column;
+                width: 90%;
+                border: 1px solid #247;
+                background: #CDF;
+                padding:10px 8px 5px 8px;
+                align-items: flex-start;
+            }
+
+            .kaze-dialog .kaze-dialog-checkbox {
+                height: 50vh;
+                overflow: auto;
+                width: 100%;
                 font-size: 16px;
-           }
-           .kaze-dialog .kaze-dialog-checkbox>div{
-                margin:4px auto;
+                margin: 10px 0 0 0;
+            }
+            
+            .kaze-dialog .kaze-dialog-checkbox>div {
+                margin: 4px auto;
                 overflow: hidden;
                 text-overflow: ellipsis;
                 white-space: nowrap;
-           }
-
-           .kaze-dialog .kaze-dialog-checkbox label{
+            }
+            
+            .kaze-dialog .kaze-dialog-checkbox label {
                 margin-left: 2px
-           }
-           .kaze-dialog .kaze-dialog-button-area{
-                display:flex
-           }
-           .kaze-dialog .kaze-dialog-button-area .kaze-dialog-close,.kaze-dialog .kaze-dialog-button-area .kaze-dialog-copy {
+            }
+            
+            .kaze-dialog .kaze-dialog-button-area,
+            .kaze-dialog .kaze-dialog-checkbox-select {
+                display: flex
+            }
+            
+            .kaze-dialog .kaze-dialog-button-area .kaze-dialog-close,
+            .kaze-dialog .kaze-dialog-button-area .kaze-dialog-copy,
+            .kaze-dialog .kaze-dialog-checkbox-select .kaze-dialog-select-all,
+            .kaze-dialog .kaze-dialog-checkbox-select .kaze-dialog-not-select-all {
                 width: 80px;
                 height: 30px;
-                margin:auto 10px;
-           }
+                margin: auto 10px;
+            }
            `;
             document.getElementsByTagName('body')[0].appendChild(styleElement);
 
             let dialogDiv = document.createElement('div');
             dialogDiv.innerHTML = `<div class="kaze-dialog">
-                    <div class="kaze-dialog-title">可以只获取勾选的种子地址；请使用 ctrl+a 或者 command+a 全选文字自行复制</div>
-                    <a target="_blank" href='https://github.com/KazeLiu/GetDmhyDownloadUrl' class="kaze-dialog-subtitle">去Github查看项目或提建议(issues)</a>
-                    <div class="kaze-dialog-checkbox"></div>
+                   <div class="kaze-dialog-title-content">
+                        <div class="kaze-dialog-title">可以只获取勾选的种子地址；请使用 ctrl+a 或者 command+a 全选文字自行复制</div>
+                        <a class="kaze-dialog-subtitle" target="_blank" href='https://github.com/KazeLiu/GetDmhyDownloadUrl' >去Github查看项目或提建议(issues)</a>
+                   </div>
+                    <div class="kaze-dialog-checkbox-content">
+                        <div class="kaze-dialog-checkbox-select">
+                            <button class="kaze-dialog-select-all">全选</button>
+                            <button class="kaze-dialog-not-select-all">全不选</button>
+                        </div>
+                        <div class="kaze-dialog-checkbox"></div>
+                    </div>
                     <div class="kaze-dialog-value">
                         <div class="quick_search_info">当前选中了X项目</div>
                         <textarea class="kaze-dialog-input" placeholder="如果不小心全部删除，按 ctrl + z 或者 command + z 撤回"></textarea>
-
                     </div>
                     <div class="kaze-dialog-button-area">
                     <button class="kaze-dialog-copy">一键复制</button>
@@ -126,6 +147,20 @@
             })
             dialogDiv.querySelector(".kaze-dialog-copy").addEventListener('click', _ => {
                 addDom.copy()
+            })
+            dialogDiv.querySelector(".kaze-dialog-select-all").addEventListener('click', _ => {
+                let checkboxList = document.querySelectorAll(".kaze-dialog .kaze-dialog-checkbox input[type='checkbox']")
+                checkboxList.forEach(item => {
+                    item.checked = true;
+                })
+                getInfo.getUrlsInCheckbox()
+            })
+            dialogDiv.querySelector(".kaze-dialog-not-select-all").addEventListener('click', _ => {
+                let checkboxList = document.querySelectorAll(".kaze-dialog .kaze-dialog-checkbox input[type='checkbox']")
+                checkboxList.forEach(item => {
+                    item.checked = false;
+                })
+                getInfo.getUrlsInCheckbox()
             })
             this.hasStyle = true;
         },
@@ -143,11 +178,11 @@
                 getInfo.getUrlsInCheckbox();
             })
         },
-        copy(){
+        copy() {
             if (navigator.clipboard) {
                 navigator.clipboard.writeText(document.querySelector('.kaze-dialog-input').value);
-                document.querySelector(".kaze-dialog-copy").innerText ="已复制";
-            }else{
+                document.querySelector(".kaze-dialog-copy").innerText = "已复制";
+            } else {
                 alert('很遗憾，浏览器不支持这个api')
             }
         }
@@ -175,7 +210,7 @@
         },
         getUrlsInCheckbox() {
             let checkboxList = document.querySelectorAll(".kaze-dialog .kaze-dialog-checkbox input[type='checkbox']:checked")
-            document.querySelector('.quick_search_info').innerHTML=`当前选中了${checkboxList.length}项`
+            document.querySelector('.quick_search_info').innerHTML = `当前选中了${checkboxList.length}项`
             let urls = [];
             checkboxList.forEach(item => {
                 urls.push(item.dataset.url)
