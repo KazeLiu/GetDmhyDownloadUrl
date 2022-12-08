@@ -12,11 +12,11 @@
 1. 搜索你喜欢的番
 2. 缩小搜索范围（筛选字幕组或者筛选画质）
 
-    ![筛选列表](https://raw.githubusercontent.com/LiuZiYang1/GetDmhyDownloadUrl/main/1.jpg "筛选列表")
+    ![筛选列表](https://raw.githubusercontent.com/LiuZiYang1/GetDmhyDownloadUrl/main/1.png "筛选列表")
 
 3. 等待列表出来后就直接点击右上角获取全部连接，然后默认会勾选列表全部，可以在这里二次筛选（筛选结果不会保存）
 
-    ![获取链接](https://raw.githubusercontent.com/LiuZiYang1/GetDmhyDownloadUrl/main/Snipaste_2022-12-08_14-15-00.png "获取链接并筛选")
+    ![获取链接](https://raw.githubusercontent.com/LiuZiYang1/GetDmhyDownloadUrl/main/2.png "获取链接并筛选")
 
 4. ctrl+a复制全部连接后粘贴到下载器即可
 
