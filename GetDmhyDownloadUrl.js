@@ -5,6 +5,7 @@
 // @description  一键获取动漫花园下载磁链!
 // @author       Kaze
 // @match        https://share.dmhy.org/*
+// @match        https://dmhy.anoneko.com/*
 // @icon         https://share.dmhy.org/favicon.ico
 // @grant        none
 // @license      MIT
