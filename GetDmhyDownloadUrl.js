@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         一键获取动漫花园下载磁链
 // @namespace    http://tampermonkey.net/
-// @version      0.1.9
+// @version      0.1.10
 // @description  一键获取动漫花园下载磁链!
 // @author       Kaze
 // @match        https://share.dmhy.org/*
